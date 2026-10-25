@@ -1,6 +1,10 @@
 # Solar System Explorer
 
-An interactive 3D solar system with all eight planets, planet facts and comparisons, Sun statistics, a physical-model size calculator, and a five-question quiz.
+An interactive 3D solar system with all eight planets, planet facts and comparisons, Sun statistics, a physical-model size calculator, and a ten-question quiz.
+
+## Live website
+
+[Open Solar System Explorer](https://solar-system-explorer-jaxson.newpanda2.chatgpt.site/)
 
 ## Run locally
 
