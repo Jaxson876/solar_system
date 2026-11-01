@@ -1,0 +1,19 @@
+{% extends "learning/base.html" %}
+{% block title %}Science Study | Study Hub{% endblock %}
+{% block content %}
+<a class="back" href="{% url 'learning:home' %}">← Back to Study Hub</a>
+<p class="eyebrow">LET YOUR CURIOSITY LEAD</p>
+<h1>Science Study</h1>
+<section class="card science welcome" aria-labelledby="welcome-title">
+  <span class="symbol" aria-hidden="true">✦</span>
+  <h2 id="welcome-title">Welcome to our solar system</h2>
+  <p>Our solar system is home to the Sun, eight planets, moons, and many smaller objects. Earth is one of those planets, travelling around the Sun along with its neighbours.</p>
+  <p>Start your science journey by wondering: what makes each planet different?</p>
+</section>
+<section class="explorer-section" aria-labelledby="explorer-title">
+  <h2 id="explorer-title">Explore your solar system</h2>
+  <p>Choose a planet, explore space, or try your solar system quiz.</p>
+  <p><a class="button" href="{% url 'solar_system' %}">Open Solar System Explorer →</a></p>
+  <iframe class="solar-system-frame" src="{% url 'solar_system' %}" title="Interactive Solar System Explorer" allowfullscreen></iframe>
+</section>
+{% endblock %}

@@ -25,6 +25,31 @@
       question: 'Which planet is famous for its large, bright rings?',
       options: ['Mars', 'Mercury', 'Saturn', 'Earth'], answer: 2,
       explanation: 'Saturn’s spectacular rings are made mostly of ice particles. Jupiter, Uranus, and Neptune also have rings, but they are much fainter.'
+    },
+    {
+      question: 'Which planet takes longer to rotate once on its axis than to orbit the Sun?',
+      options: ['Mercury', 'Mars', 'Venus', 'Neptune'], answer: 2,
+      explanation: 'Venus takes about 243 Earth days to rotate once relative to the stars, but only about 225 Earth days to orbit the Sun. Its sunrise-to-sunrise day is different: about 117 Earth days.'
+    },
+    {
+      question: 'Which planet has an axial tilt of about 98 degrees, making it rotate almost on its side?',
+      options: ['Uranus', 'Saturn', 'Neptune', 'Jupiter'], answer: 0,
+      explanation: 'Uranus has an axial tilt of about 98 degrees. This extreme tilt gives it very different seasons from those on Earth.'
+    },
+    {
+      question: 'Which moon is the largest in the solar system, with a diameter greater than Mercury’s?',
+      options: ['Titan', 'Europa', 'Triton', 'Ganymede'], answer: 3,
+      explanation: 'Jupiter’s moon Ganymede is the largest moon in the solar system. It is wider than Mercury, although it has less mass.'
+    },
+    {
+      question: 'Which planet is the only one with an average density lower than liquid water?',
+      options: ['Jupiter', 'Saturn', 'Uranus', 'Neptune'], answer: 1,
+      explanation: 'Saturn has an average density of about 0.7 grams per cubic centimetre, compared with about 1 for liquid water. Its huge volume contains mostly hydrogen and helium.'
+    },
+    {
+      question: 'How many times does Mercury rotate on its axis during two complete orbits around the Sun?',
+      options: ['Once', 'Twice', 'Three times', 'Four times'], answer: 2,
+      explanation: 'Mercury is in a 3:2 spin-orbit resonance: it rotates three times relative to the stars for every two orbits around the Sun.'
     }
   ];
   const form = document.querySelector('#quiz-form');
@@ -37,7 +62,7 @@
 
   container.innerHTML = questions.map((q, i) => `
     <fieldset class="quiz-question" id="quiz-q${i}">
-      <legend><span class="quiz-number">0${i + 1}</span>${q.question}</legend>
+      <legend><span class="quiz-number">${String(i + 1).padStart(2, '0')}</span>${q.question}</legend>
       <div class="quiz-options">${q.options.map((option, j) => `
         <label class="quiz-option"><input type="radio" name="quiz-${i}" value="${j}" required aria-describedby="quiz-feedback-${i}"><span class="quiz-letter">${String.fromCharCode(65 + j)}</span><span>${option}</span></label>
       `).join('')}</div>
@@ -70,7 +95,7 @@
       feedback.hidden = false;
     });
     submitted = true;
-    const message = score === 5 ? 'Perfect score, space explorer!' : score >= 3 ? 'Nice exploring! Keep your curiosity going.' : 'Every explorer starts somewhere. Read the answers and have another go!';
+    const message = score === questions.length ? 'Perfect score, space explorer!' : score >= questions.length * 0.6 ? 'Nice exploring! Keep your curiosity going.' : 'Every explorer starts somewhere. Read the answers and have another go!';
     result.innerHTML = `<span class="eyebrow">MISSION COMPLETE</span><h3>${score} / ${questions.length}</h3><p>${message}</p><p class="quiz-result-hint">Your answers and explanations are shown above.</p>`;
     result.hidden = false;
     progress.textContent = 'Quiz complete';
