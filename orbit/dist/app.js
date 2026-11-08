@@ -84,6 +84,22 @@ function paintGalaxy(){
    sky.strokeStyle='#dceaff66';sky.lineWidth=.6;sky.beginPath();sky.moveTo(x-4,y);sky.lineTo(x+4,y);sky.moveTo(x,y-4);sky.lineTo(x,y+4);sky.stroke();
   }
  }
+ // A distant black hole with a glowing accretion disk and gravitational lensing.
+ const blackHoleX=width*(width<600?.74:.78),blackHoleY=height*(width<600?.19:.22),bh=Math.min(width,height)*.105;
+ sky.save();sky.translate(blackHoleX,blackHoleY);sky.rotate(-.18);
+ const halo=sky.createRadialGradient(0,0,bh*.18,0,0,bh*1.9);
+ halo.addColorStop(0,'rgba(255,244,210,.18)');halo.addColorStop(.3,'rgba(255,155,62,.09)');halo.addColorStop(.65,'rgba(170,70,40,.025)');halo.addColorStop(1,'rgba(0,0,0,0)');
+ sky.scale(1,.34);sky.fillStyle=halo;sky.beginPath();sky.arc(0,0,bh*1.9,0,Math.PI*2);sky.fill();sky.restore();
+ sky.save();sky.translate(blackHoleX,blackHoleY);sky.rotate(-.18);sky.scale(1,.34);
+ const disk=sky.createRadialGradient(0,0,bh*.45,0,0,bh*1.55);
+ disk.addColorStop(0,'rgba(255,255,225,0)');disk.addColorStop(.28,'rgba(255,246,190,.96)');disk.addColorStop(.43,'rgba(255,166,75,.92)');disk.addColorStop(.58,'rgba(210,72,35,.64)');disk.addColorStop(.72,'rgba(112,51,70,.18)');disk.addColorStop(1,'rgba(80,35,55,0)');
+ sky.fillStyle=disk;sky.beginPath();sky.arc(0,0,bh*1.55,0,Math.PI*2);sky.fill();
+ sky.lineWidth=1.1;for(let ring=0;ring<5;ring++){sky.strokeStyle=`rgba(255,${190-ring*20},${100-ring*12},${.24-ring*.035})`;sky.beginPath();sky.arc(0,0,bh*(.72+ring*.13),0,Math.PI*2);sky.stroke();}sky.restore();
+ const lens=sky.createRadialGradient(blackHoleX,blackHoleY,bh*.49,blackHoleX,blackHoleY,bh*.78);
+ lens.addColorStop(0,'rgba(0,0,0,1)');lens.addColorStop(.62,'rgba(0,0,0,1)');lens.addColorStop(.68,'rgba(255,245,211,.96)');lens.addColorStop(.72,'rgba(255,172,82,.5)');lens.addColorStop(.78,'rgba(255,210,120,.12)');lens.addColorStop(1,'rgba(0,0,0,0)');
+ sky.fillStyle=lens;sky.beginPath();sky.arc(blackHoleX,blackHoleY,bh*.78,0,Math.PI*2);sky.fill();
+ sky.fillStyle='#000';sky.beginPath();sky.arc(blackHoleX,blackHoleY,bh*.54,0,Math.PI*2);sky.fill();
+ sky.strokeStyle='rgba(255,232,183,.45)';sky.lineWidth=.7;sky.beginPath();sky.arc(blackHoleX,blackHoleY,bh*.57,0,Math.PI*2);sky.stroke();
  sky.globalAlpha=1;sky.globalCompositeOperation='source-over';
 }
 function hex(h){return h.match(/\w\w/g).map(x=>parseInt(x,16));}

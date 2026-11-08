@@ -43,8 +43,13 @@ To set up again with Python 3.14.10:
 python3.14 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
+python -c "import pathlib, secrets; pathlib.Path('.django-secret-key').write_text(secrets.token_urlsafe(64))"
 python manage.py migrate
 ```
+
+Django reads `DJANGO_SECRET_KEY` from the environment, or falls back to the
+ignored local `.django-secret-key` file. Set `DJANGO_SECRET_KEY` in your hosting
+provider for deployment. Keep the key private.
 
 ### Where to edit
 

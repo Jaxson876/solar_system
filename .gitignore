@@ -7,3 +7,8 @@ orbit/.git/
 __pycache__/
 *.py[cod]
 db.sqlite3
+
+# Local secrets
+.env
+.env.*
+.django-secret-key
