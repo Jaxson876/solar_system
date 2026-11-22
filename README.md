@@ -32,6 +32,10 @@ python manage.py runserver
 ```
 
 Keep that Terminal running, then open http://127.0.0.1:8000/ for Study Hub.
+Use **Sign up** to create an account and sign in automatically. Use **Log in**
+to return later, and **Log out** to end your session. Accounts are stored in the
+local SQLite database; run `python manage.py migrate` first if setting up a new
+database. Run `python manage.py test` to check the study pages and account flows.
 Click Science, or visit http://127.0.0.1:8000/science/ for Science Study.
 Press Control-C to stop the server; run `deactivate` to leave the environment.
 The original explorer's optional HTTP server also uses port 8000, so stop it

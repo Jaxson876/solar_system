@@ -1,5 +1,37 @@
 from django.test import TestCase
 from django.urls import reverse
+from django.contrib.auth import get_user_model
+
+
+class AuthenticationTests(TestCase):
+    def test_signup_signs_student_in_and_logout_ends_session(self):
+        response = self.client.post(reverse("learning:signup"), {
+            "username": "student", "password1": "A-strong-study-pass-42", "password2": "A-strong-study-pass-42",
+        }, follow=True)
+        self.assertRedirects(response, reverse("learning:home"))
+        self.assertContains(response, "Welcome, student!")
+        self.assertTrue(get_user_model().objects.filter(username="student").exists())
+        self.assertEqual(self.client.get(reverse("logout")).status_code, 405)
+        response = self.client.post(reverse("logout"), follow=True)
+        self.assertRedirects(response, reverse("learning:home"))
+        self.assertNotContains(response, "Welcome, student!")
+
+    def test_signup_rejects_invalid_passwords(self):
+        response = self.client.post(reverse("learning:signup"), {
+            "username": "student", "password1": "short", "password2": "different",
+        })
+        self.assertEqual(response.status_code, 200)
+        self.assertFormError(response.context["form"], "password2", "The two password fields didn’t match.")
+        self.assertFalse(get_user_model().objects.filter(username="student").exists())
+
+    def test_login_rejects_wrong_password_and_accepts_correct_password(self):
+        get_user_model().objects.create_user(username="student", password="A-strong-study-pass-42")
+        response = self.client.post(reverse("login"), {"username": "student", "password": "wrong"})
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.context["form"].errors)
+        response = self.client.post(reverse("login"), {"username": "student", "password": "A-strong-study-pass-42"}, follow=True)
+        self.assertRedirects(response, reverse("learning:home"))
+        self.assertContains(response, "Welcome, student!")
 
 
 class StudyPagesTests(TestCase):

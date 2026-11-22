@@ -1,9 +1,17 @@
 {% extends "learning/base.html" %}
 {% block content %}
-<p class="eyebrow">WELCOME TO YOUR STUDY SPACE</p>
+<section class="hero">
+<div class="hero-copy">
+<p class="eyebrow"><span aria-hidden="true">✦</span> YOUR LITTLE SPACE TO LEARN</p>
+{% if user.is_authenticated %}<p>Welcome, {{ user.username }}!</p>{% endif %}
 <h1>What will you discover today?</h1>
 <p class="intro">Pick a subject and take your next small step.</p>
-<section class="subjects" aria-label="Study subjects">
+<a class="hero-link" href="#subjects">Explore subjects <span aria-hidden="true">↓</span></a>
+</div>
+<div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="hero-planet">✦</div><i class="star star-one">✳</i><i class="star star-two">✧</i><i class="star star-three">✦</i></div>
+</section>
+<div class="section-heading"><div><p class="eyebrow">A WORLD OF POSSIBILITIES</p><h2>Choose your adventure</h2></div><p>One little step at a time.</p></div>
+<section class="subjects" id="subjects" aria-label="Study subjects">
   <article class="card science"><span class="symbol" aria-hidden="true">✦</span><h2>Science</h2><p>Big questions. Amazing discoveries. Start with our solar system.</p><a class="button" href="{% url 'learning:science' %}">Science <span aria-hidden="true">→</span></a></article>
   <article class="card"><span class="symbol" aria-hidden="true">＋</span><h2>Math</h2><p>Explore numbers, patterns, and problem solving.</p><span class="soon">Coming later</span></article>
   <article class="card"><span class="symbol" aria-hidden="true">Aa</span><h2>English</h2><p>Discover stories, words, and new ways to express yourself.</p><span class="soon">Coming later</span></article>
