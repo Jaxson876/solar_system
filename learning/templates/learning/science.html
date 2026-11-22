@@ -1,4 +1,5 @@
 {% extends "learning/base.html" %}
+{% load static %}
 {% block title %}Science Study | Study Hub{% endblock %}
 {% block content %}
 <a class="back" href="{% url 'learning:home' %}">← Back to Study Hub</a>
@@ -13,7 +14,7 @@
 <section class="explorer-section" aria-labelledby="explorer-title">
   <h2 id="explorer-title">Explore your solar system</h2>
   <p>Choose a planet, explore space, or try your solar system quiz.</p>
-  <p><a class="button" href="{% url 'solar_system' %}">Open Solar System Explorer →</a></p>
-  <iframe class="solar-system-frame" src="{% url 'solar_system' %}" title="Interactive Solar System Explorer" allowfullscreen></iframe>
+  <p><a class="button" href="{% static 'solar-system/index.html' %}">Open Solar System Explorer →</a></p>
+  <iframe class="solar-system-frame" src="{% static 'solar-system/index.html' %}" title="Interactive Solar System Explorer" allowfullscreen></iframe>
 </section>
 {% endblock %}

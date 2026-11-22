@@ -62,7 +62,7 @@ class StudyPagesTests(TestCase):
             clear_url_caches()
             try:
                 response = self.client.get("/science/")
-                self.assertContains(response, 'src="/science/solar-system/"')
+                self.assertContains(response, 'src="/static/solar-system/index.html"')
                 self.assertContains(response, '<title>Science Study | Study Hub</title>', html=True)
                 self.assertContains(response, '<iframe', count=1)
                 explorer = self.client.get("/science/solar-system/")

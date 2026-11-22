@@ -55,6 +55,12 @@ Django reads `DJANGO_SECRET_KEY` from the environment, or falls back to the
 ignored local `.django-secret-key` file. Set `DJANGO_SECRET_KEY` in your hosting
 provider for deployment. Keep the key private.
 
+For Vercel, generate a secret locally with `python3 -c "import secrets; print(secrets.token_urlsafe(64))"`.
+In the Vercel project, open **Settings → Environment Variables**, add
+`DJANGO_SECRET_KEY` with that value for the deployment environments you use,
+and redeploy. Do not commit or share the key. Vercel cannot use the ignored
+local `.django-secret-key` file.
+
 ### Where to edit
 
 - `config/settings.py`: project-wide settings; registers the learning app.
@@ -75,8 +81,7 @@ The URL tag looks up a named address so links stay correct if the address change
 Check the pages with `python manage.py test learning` and
 `python manage.py check`. This setup uses local development settings.
 
-The Science page now embeds the existing Solar System Explorer and includes an
-“Open Solar System Explorer” link for a full-page view. Its original HTML,
-JavaScript, CSS, and textures are served from `orbit/dist/` without moving or
-changing them. These explorer routes are for local development (`DEBUG=True`);
-a future production deployment will need static-file hosting configured.
+The Science page embeds the Solar System Explorer from `orbit/dist/` using
+Django static files. `STATIC_ROOT` enables Vercel's Django integration to run
+`collectstatic` at build time and serve the stylesheet and explorer assets.
+For a local collection check, run `python manage.py collectstatic --noinput`.
